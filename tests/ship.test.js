@@ -28,7 +28,6 @@ test("Sink Battleship Test", () => {
   battleship.hit();
   battleship.hit();
   battleship.hit();
-  battleship.isSunk();
   const result = {
     length: battleship.length,
     hitCount: battleship.hitCount,
@@ -62,7 +61,6 @@ test("submarine sink Test", () => {
   submarine.hit();
   submarine.hit();
   submarine.hit();
-  submarine.isSunk();
   const result = {
     length: submarine.length,
     hitCount: submarine.hitCount,
