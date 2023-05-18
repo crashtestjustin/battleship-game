@@ -23,6 +23,7 @@ export const ship = (type) => {
     sunk: sunk,
     hit: function () {
       this.hitCount += 1;
+      this.isSunk();
     },
     isSunk: function () {
       if (this.hitCount >= this.length) {
