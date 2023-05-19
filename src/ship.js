@@ -18,6 +18,7 @@ export const ship = (type) => {
   };
 
   const obj = {
+    name: type,
     length: length(type),
     hitCount: hitCount,
     sunk: sunk,
