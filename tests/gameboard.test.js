@@ -1,13 +1,13 @@
 import { gameboardFactory } from "../src/gameboard.js";
 
-test("gameboard factory adds ships to gameboard array", () => {
+test("gameboard factory randomly palces ships to gameboard array", () => {
   const newBoard = gameboardFactory();
-  newBoard.placeShips();
+  newBoard.placeShipsRandom();
   expect(newBoard.boardArray.length).toBeGreaterThan(0);
 });
 
-test("gameboard factory adds 5 ships to boardArray", () => {
+test("gameboard factory randomly places 5 ships to boardArray", () => {
   const newBoard = gameboardFactory();
-  newBoard.placeShips();
+  newBoard.placeShipsRandom();
   expect(newBoard.boardArray.length).toEqual(5);
 });
