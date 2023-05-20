@@ -13,25 +13,27 @@ export const gameboardFactory = () => {
     ],
     shipsSunk: 0,
 
-    placeShip: function () {
+    placeShips: function () {
       for (let i = 0; i < this.shipsLeft.length; i++) {
         let isVertical = randomVert();
-        let shipObj = new ship(this.shipsLeft[i]);
-        let startingCoordinates = getRandomCoordinates();
-        let shipCoordinates = this.checkValidPlacement(
-          shipObj,
-          startingCoordinates,
-          isVertical
-        );
-        if (shipCoordinates) {
-          this.boardArray.push(shipCoordinates);
-        } else {
-          shipCoordinates = this.checkValidPlacement(
-            shipObj,
-            getRandomCoordinates(),
-            isVertical
-          );
-        }
+        let shipObj = ship(this.shipsLeft[i]);
+        let shipCoordinates = this.placeShipRecursive(shipObj, isVertical);
+        this.boardArray.push(shipCoordinates);
+      }
+    },
+
+    placeShipRecursive: function (shipObj, isVertical) {
+      let startingCoordinates = getRandomCoordinates();
+      let shipCoordinates = this.checkValidPlacement(
+        shipObj,
+        startingCoordinates,
+        isVertical
+      );
+
+      if (shipCoordinates) {
+        return shipCoordinates;
+      } else {
+        return this.placeShipRecursive(shipObj, isVertical);
       }
     },
 
