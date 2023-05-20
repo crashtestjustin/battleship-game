@@ -19,6 +19,7 @@ export const gameboardFactory = () => {
         let shipObj = ship(this.shipsLeft[i]);
         let shipCoordinates = this.placeShipRecursive(shipObj, isVertical);
         this.boardArray.push(shipCoordinates);
+        shipObj.location = shipCoordinates;
       }
     },
 
@@ -62,18 +63,20 @@ export const gameboardFactory = () => {
     },
 
     compareArrays: function (a, b) {
-      let overlap = false;
-      for (let i = 0; i < this.boardArray.length; i++) {
-        if (
-          this.boardArray[i].some(
-            (coord) => coord[0] === a[0] && coord[1] === a[1]
-          )
-        ) {
-          overlap = true;
-          break;
+      if (b === undefined) {
+        let overlap = false;
+        for (let i = 0; i < this.boardArray.length; i++) {
+          if (
+            this.boardArray[i].some(
+              (coord) => coord[0] === a[0] && coord[1] === a[1]
+            )
+          ) {
+            overlap = true;
+            break;
+          }
         }
+        return overlap;
       }
-      return overlap;
     },
   };
   return gameboard;
