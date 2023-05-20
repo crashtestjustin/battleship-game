@@ -13,7 +13,7 @@ export const gameboardFactory = () => {
     ],
     shipsSunk: 0,
 
-    placeShips: function () {
+    placeShipsRandom: function () {
       for (let i = 0; i < this.shipsLeft.length; i++) {
         let isVertical = randomVert();
         let shipObj = ship(this.shipsLeft[i]);
