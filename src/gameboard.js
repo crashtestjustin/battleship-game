@@ -22,7 +22,6 @@ export const gameboardFactory = () => {
         this.boardArray.push(shipCoordinates);
         this.shipObjects.push(shipObj);
         shipObj.location = shipCoordinates;
-        // console.log(this.shipObjects);
       }
     },
 
