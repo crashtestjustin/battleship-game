@@ -23,7 +23,7 @@ export const ship = (type) => {
     hitCount: hitCount,
     sunk: sunk,
     hit: function () {
-      this.hitCount += 1;
+      this.hitCount++;
       this.isSunk();
     },
     isSunk: function () {
