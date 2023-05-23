@@ -4,6 +4,7 @@ export const gameboardFactory = () => {
   const gameboard = {
     boardArray: [],
     missedGuesses: [],
+    hitGuesses: [],
     shipsLeft: [
       "Carrier",
       "Battleship",
@@ -79,13 +80,30 @@ export const gameboardFactory = () => {
       return overlap;
     },
 
+    checkForAllSunk: function () {
+      let sunkCounter = 0;
+      for (let i = 0; i < this.shipObjects.length; i++) {
+        if (this.shipObjects[i].sunk) {
+          sunkCounter++;
+          this.shipsSunk++;
+        }
+      }
+      if (sunkCounter === 5) {
+        return 5;
+      }
+    },
+
     receiveAttack: function (coordinates) {
       for (let i = 0; i < this.shipObjects.length; i++) {
         if (this.compareArrays(coordinates)) {
           this.shipObjects[i].hit();
-          //need to create checkforsunship function that checks the ship is sunk and
-          //updates the gameboard markers as needed.
-          return this.shipObjects[i];
+          this.hitGuesses.push(coordinates);
+          const checkAllSunk = this.checkForAllSunk();
+          if (checkAllSunk === 5) {
+            return checkAllSunk;
+          } else {
+            return this.shipObjects[i];
+          }
         }
       }
       this.missedGuesses.push(coordinates);
