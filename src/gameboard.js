@@ -81,33 +81,36 @@ export const gameboardFactory = () => {
     },
 
     checkForAllSunk: function () {
-      let sunkCounter = 0;
+      this.shipsSunk = 0;
       for (let i = 0; i < this.shipObjects.length; i++) {
         if (this.shipObjects[i].sunk) {
-          sunkCounter++;
           this.shipsSunk++;
         }
       }
-      if (sunkCounter === 5) {
-        return 5;
-      }
+      return this.shipsSunk;
     },
 
     receiveAttack: function (coordinates) {
+      let hitShip = null;
       for (let i = 0; i < this.shipObjects.length; i++) {
         if (this.compareArrays(coordinates)) {
           this.shipObjects[i].hit();
           this.hitGuesses.push(coordinates);
-          const checkAllSunk = this.checkForAllSunk();
-          if (checkAllSunk === 5) {
-            return checkAllSunk;
-          } else {
-            return this.shipObjects[i];
-          }
+          hitShip = this.shipObjects[i];
+          break;
         }
       }
-      this.missedGuesses.push(coordinates);
-      return null;
+      if (hitShip !== null) {
+        const checkAllSunk = this.checkForAllSunk();
+        if (checkAllSunk === 5) {
+          return checkAllSunk;
+        } else {
+          return hitShip;
+        }
+      } else {
+        this.missedGuesses.push(coordinates);
+        return null;
+      }
     },
   };
   return gameboard;
