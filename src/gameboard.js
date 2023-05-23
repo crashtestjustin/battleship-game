@@ -83,6 +83,8 @@ export const gameboardFactory = () => {
       for (let i = 0; i < this.shipObjects.length; i++) {
         if (this.compareArrays(coordinates)) {
           this.shipObjects[i].hit();
+          //need to create checkforsunship function that checks the ship is sunk and
+          //updates the gameboard markers as needed.
           return this.shipObjects[i];
         }
       }
