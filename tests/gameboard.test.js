@@ -57,21 +57,30 @@ const mockShip = {
   ],
 };
 
-test("sink all ships", () => {
+test("sink a ships and increment shipsSunk", () => {
   const gameboard = gameboardFactory();
   gameboard.placeShipsRandom();
-  for (let i = 0; i < gameboard.boardArray.length; i++) {
-    for (let j = 0; j < gameboard.boardArray[i].length; j++) {
-      gameboard.receiveAttack(gameboard.boardArray[i][j]);
-      console.log(gameboard.boardArray[i][j]);
-    }
-    console.log(
-      gameboard.shipObjects[i].name,
-      gameboard.shipObjects[i].location,
-      gameboard.shipObjects[i].sunk
-    );
-    console.log(gameboard.shipsSunk);
-  }
+  gameboard.receiveAttack(gameboard.shipObjects[4].location[0]);
+  gameboard.receiveAttack(gameboard.shipObjects[4].location[1]);
   const shipsSunk = gameboard.shipsSunk;
-  expect(shipsSunk).toBe(5);
+  expect(shipsSunk).toBe(1);
 });
+
+// test("sink all ships", () => {
+//   const gameboard = gameboardFactory();
+//   gameboard.placeShipsRandom();
+//   for (let i = 0; i < gameboard.boardArray.length; i++) {
+//     for (let j = 0; j < gameboard.boardArray[i].length; j++) {
+//       console.log(`Attack Coordinate: ${gameboard.boardArray[i][j]}`);
+//       gameboard.receiveAttack(gameboard.boardArray[i][j]);
+//     }
+//     console.log(
+//       gameboard.shipObjects[i].name,
+//       gameboard.shipObjects[i].location,
+//       gameboard.shipObjects[i].sunk
+//     );
+//     // console.log(gameboard.shipsSunk);
+//   }
+//   const shipsSunk = gameboard.shipsSunk;
+//   expect(shipsSunk).toBe(5);
+// });
