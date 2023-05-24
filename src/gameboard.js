@@ -65,35 +65,46 @@ export const gameboardFactory = () => {
       return coorindates;
     },
 
-    compareArrays: function (a) {
+    compareArrays: function (a, b) {
       let overlap = false;
-      for (let i = 0; i < this.boardArray.length; i++) {
-        if (
-          this.boardArray[i].some(
-            (coord) => coord[0] === a[0] && coord[1] === a[1]
-          )
-        ) {
-          overlap = true;
-          break;
+      if (b === undefined) {
+        for (let i = 0; i < this.boardArray.length; i++) {
+          if (
+            this.boardArray[i].some(
+              (coord) => coord[0] === a[0] && coord[1] === a[1]
+            )
+          ) {
+            overlap = true;
+            break;
+          }
+        }
+      } else {
+        for (let i = 0; i < a.length; i++) {
+          if (a[i][0] === b[0] && a[i][1] === b[1]) {
+            overlap = true;
+            break;
+          }
         }
       }
       return overlap;
     },
 
     checkForAllSunk: function () {
-      this.shipsSunk = 0;
+      let sunkenShips = 0;
       for (let i = 0; i < this.shipObjects.length; i++) {
         if (this.shipObjects[i].sunk) {
-          this.shipsSunk++;
+          sunkenShips++;
         }
       }
-      return this.shipsSunk;
+      this.shipsSunk = sunkenShips;
+      return sunkenShips;
     },
 
     receiveAttack: function (coordinates) {
       let hitShip = null;
       for (let i = 0; i < this.shipObjects.length; i++) {
-        if (this.compareArrays(coordinates)) {
+        const shipCoordinates = this.shipObjects[i].location;
+        if (this.compareArrays(shipCoordinates, coordinates)) {
           this.shipObjects[i].hit();
           this.hitGuesses.push(coordinates);
           hitShip = this.shipObjects[i];
