@@ -1,5 +1,4 @@
 export const ship = (type) => {
-  let hitCount = 0;
   let sunk = false;
 
   const length = () => {
@@ -14,13 +13,15 @@ export const ship = (type) => {
         return 3;
       case "Patrol Boat":
         return 2;
+      default:
+        return 0;
     }
   };
 
   const obj = {
     name: type,
-    length: length(type),
-    hitCount: hitCount,
+    length: length(),
+    hitCount: 0,
     sunk: sunk,
     hit: function () {
       this.hitCount++;
