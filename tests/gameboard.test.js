@@ -81,4 +81,5 @@ test("sink all ships and get shipsSunk value of 5", () => {
 
   const shipsSunk = gameboard.shipsSunk;
   expect(shipsSunk).toBe(5);
+  expect(gameboard.shipsLeft.length).toBe(0);
 });
