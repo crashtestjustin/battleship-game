@@ -108,7 +108,6 @@ export const gameboardFactory = () => {
           this.shipObjects[i].hit();
           this.hitGuesses.push(coordinates);
           hitShip = this.shipObjects[i];
-          console.log(hitShip);
           if (hitShip.sunk) {
             this.shipsLeft = [];
             for (let j = 0; j < this.shipObjects.length; j++) {
@@ -117,7 +116,6 @@ export const gameboardFactory = () => {
               }
             }
           }
-          console.log(this.shipsLeft);
           break;
         }
       }
