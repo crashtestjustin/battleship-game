@@ -135,7 +135,7 @@ export const gameboardFactory = () => {
   return gameboard;
 };
 
-function getRandomCoordinates() {
+export function getRandomCoordinates() {
   return [parseInt(Math.random() * 10), parseInt(Math.random() * 10)];
 }
 
