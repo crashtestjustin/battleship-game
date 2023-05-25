@@ -1,13 +1,41 @@
-import { gameboardFactory } from "./gameboard";
+import { gameboardFactory, getRandomCoordinates } from "./gameboard";
 
 export const playerFactory = (name) => {
   const player = {
     name: name,
     CPU: name !== "CPU" ? false : true,
     oponentGameboard: gameboardFactory(),
+    attackHistory: [],
+
+    checkAttackHist: function (attack) {
+      if (
+        this.oponentGameboard.compareArrays(
+          this.oponentGameboard.hitGuesses,
+          attack
+        ) ||
+        this.oponentGameboard.compareArrays(
+          this.oponentGameboard.missedGuesses,
+          attack
+        )
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
 
     submitAttack: function (attackCoordinate) {
+      if (attackCoordinate === undefined) {
+        let attack = getRandomCoordinates();
+        let validAttack = this.checkAttackHist(attack);
+        if (validAttack) {
+          attackCoordinate = attack;
+        } else {
+          this.submitAttack();
+        }
+      }
       const attack = this.oponentGameboard.receiveAttack(attackCoordinate);
+      this.attackHistory.push(attackCoordinate);
       return attack;
     },
   };
