@@ -41,12 +41,21 @@ test("check CPU history uniqueness logging", () => {
   newPlayer.oponentGameboard.placeShipsRandom();
   newCPU.oponentGameboard.placeShipsRandom();
   for (let i = 0; i < 100; i++) {
-    const shipAttack = newCPU.submitAttack();
+    newCPU.submitAttack();
   }
-  const array = newCPU.attackHistory;
-  console.log(array);
-  expect(isArrayUnique(array)).toBe(true);
+  console.log(newCPU.attackHistory);
+  const arrayCheck = checkDuplicateAttacks(newCPU.attackHistory);
+  expect(arrayCheck).toBe(false);
 });
 
-isArrayUnique = (array) =>
-  Array.isArray(array) && new Set(array).size === array.length;
+function checkDuplicateAttacks(array) {
+  const set = new Set();
+  for (let subarray of array) {
+    const key = JSON.stringify(subarray);
+    if (set.has(key)) {
+      return true;
+    }
+    set.add(key);
+  }
+  return false;
+}
