@@ -8,31 +8,22 @@ export const playerFactory = (name) => {
     attackHistory: [],
 
     checkAttackHist: function (attack) {
-      if (
-        this.oponentGameboard.compareArrays(
-          this.oponentGameboard.hitGuesses,
-          attack
-        ) ||
-        this.oponentGameboard.compareArrays(
-          this.oponentGameboard.missedGuesses,
-          attack
-        )
-      ) {
-        return false;
-      } else {
-        return true;
+      let attackList = this.attackHistory;
+      for (let subAttack of attackList) {
+        if (subAttack[0] === attack[0] && subAttack[1] === attack[1]) {
+          return true;
+        }
       }
+      return false;
     },
 
     submitAttack: function (attackCoordinate) {
       if (attackCoordinate === undefined) {
-        let attack = getRandomCoordinates();
-        let validAttack = this.checkAttackHist(attack);
-        if (validAttack) {
-          attackCoordinate = attack;
-        } else {
-          this.submitAttack();
-        }
+        let newAttack;
+        do {
+          newAttack = getRandomCoordinates();
+        } while (this.checkAttackHist(newAttack));
+        attackCoordinate = newAttack;
       }
       const attack = this.oponentGameboard.receiveAttack(attackCoordinate);
       this.attackHistory.push(attackCoordinate);
