@@ -24,8 +24,10 @@ export function body() {
   title.textContent = "Body";
 
   const gameInputs = createDiv("game-inputs");
+  const inputTitle = createDiv("player-name-title");
+  inputTitle.textContent = "Your Name:";
   const playerName = createInput("text", "name", "name", "Enter your name.");
-  gameInputs.appendChild(playerName);
+  gameInputs.append(inputTitle, playerName);
 
   const boardDiv = createDiv("board-div");
 
