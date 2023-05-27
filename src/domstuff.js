@@ -27,8 +27,10 @@ export function body() {
   const playerName = createInput("text", "name", "name", "Enter your name.");
   gameInputs.appendChild(playerName);
 
+  const boardDiv = createDiv("board-div");
+
   section.appendChild(title);
-  section.appendChild(gameInputs);
+  section.append(gameInputs, boardDiv);
 
   return section;
 }
