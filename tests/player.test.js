@@ -43,7 +43,6 @@ test("check CPU history uniqueness logging", () => {
   for (let i = 0; i < 100; i++) {
     newCPU.submitAttack();
   }
-  console.log(newCPU.attackHistory);
   const arrayCheck = checkDuplicateAttacks(newCPU.attackHistory);
   expect(arrayCheck).toBe(false);
 });
