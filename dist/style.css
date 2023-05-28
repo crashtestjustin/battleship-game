@@ -1,0 +1,76 @@
+:root {
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header,
+.body,
+.footer {
+  margin: 1rem;
+}
+
+.header {
+  background-color: lightskyblue;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.body {
+  display: grid;
+  grid-template-rows: max-content 1fr auto;
+  row-gap: 1.5rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.body-title {
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
+.game-inputs {
+  display: grid;
+  grid-template: repeat(2, 2rem) / max-content 1fr;
+  align-items: center;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  width: 80%;
+}
+
+.game-inputs input {
+  height: 1.5rem;
+}
+
+.start-game {
+  grid-column: 1 / 3;
+  width: 80%;
+  height: 100%;
+  justify-self: center;
+}
+
+.board-div {
+  display: grid;
+  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+  height: 300px;
+  width: 300px;
+  border: 0.5px solid black;
+}
+
+.grid-square {
+  border: 0.5px solid black;
+  box-sizing: content-box;
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  background-color: lightgray;
+  position: sticky;
+  bottom: 0;
+}
