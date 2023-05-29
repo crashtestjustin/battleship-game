@@ -45,6 +45,14 @@ body {
 
 .game-inputs input {
   height: 1.5rem;
+  background-color: bisque;
+  padding-left: 0.5rem;
+}
+
+.game-inputs input,
+.start-game {
+  border-radius: 8px;
+  border: none;
 }
 
 .start-game {
