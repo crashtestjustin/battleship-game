@@ -1,3 +1,15 @@
 import { playerFactory } from "./player";
 
-export function gameloop() {}
+export function newGameLoop() {
+  const startGame = document.querySelector(".start-game");
+  startGame.addEventListener("click", (e) => {
+    const userPlayer = playerFactory(document.querySelector("#name").value);
+    const cpuPlayer = playerFactory();
+    userPlayer.oponentGameboard.placeShipsRandom();
+    cpuPlayer.oponentGameboard.placeShipsRandom();
+    while (
+      userPlayer.oponentGameboard.shipsSunk < 5 ||
+      cpuPlayer.oponentGameboard.shipsSunk < 5
+    ) {}
+  });
+}
