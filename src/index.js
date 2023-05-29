@@ -1,4 +1,4 @@
-import { gameloop } from "./gameloop";
+import { newGameLoop } from "./gameloop";
 import { header, body, footer } from "./domstuff";
 
 function application() {
@@ -17,3 +17,4 @@ function application() {
 }
 
 application();
+newGameLoop();
