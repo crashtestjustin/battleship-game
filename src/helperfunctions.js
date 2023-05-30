@@ -29,3 +29,16 @@ export function createButton(btnClass, btnTextContent) {
   button.textContent = btnTextContent;
   return button;
 }
+
+export function generateCoor(i) {
+  const boardSize = 10;
+  const board = [];
+
+  for (let r = 0; r < boardSize; r++) {
+    for (let c = 0; c < boardSize; c++) {
+      let coor = [r, c];
+      board.push(coor);
+    }
+  }
+  return board[i];
+}
