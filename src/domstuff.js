@@ -42,9 +42,11 @@ export function body() {
   const boardDiv = createDiv("board-div");
   boardDiv.classList.add("player-board");
   for (let i = 0; i < 100; i++) {
-    const boardSquare = createDiv("grid-square");
-    const coordinate = generateCoor(i);
-    boardSquare.dataset.coor = JSON.stringify(coordinate);
+    const boardSquare = createDiv(
+      "grid-square",
+      JSON.stringify(generateCoor(i))
+    );
+    boardSquare.classList.add("p-grid");
     boardDiv.appendChild(boardSquare);
   }
 
@@ -54,7 +56,11 @@ export function body() {
   const cpuBoardDiv = createDiv("board-div");
   cpuBoardDiv.classList.add("cpu-board");
   for (let i = 0; i < 100; i++) {
-    const boardSquare = createDiv("grid-square");
+    const boardSquare = createDiv(
+      "grid-square",
+      JSON.stringify(generateCoor(i))
+    );
+    boardSquare.classList.add("c-grid");
     cpuBoardDiv.appendChild(boardSquare);
   }
 
