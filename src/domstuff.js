@@ -4,6 +4,7 @@ import {
   createButton,
   createInput,
   createImg,
+  generateCoor,
 } from "./helperfunctions";
 
 export function header() {
@@ -42,6 +43,8 @@ export function body() {
   boardDiv.classList.add("player-board");
   for (let i = 0; i < 100; i++) {
     const boardSquare = createDiv("grid-square");
+    const coordinate = generateCoor(i);
+    boardSquare.dataset.coor = JSON.stringify(coordinate);
     boardDiv.appendChild(boardSquare);
   }
 
