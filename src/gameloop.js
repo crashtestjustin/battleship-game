@@ -38,6 +38,5 @@ export function newGameLoop() {
   });
 }
 
-//need to fix overlapping error on ship placement in placeShipsRandom function
 //using while loop to run through plaer guess and cpu random guess
 //once one of the board's shipsSunk is 5 => run a determination for a winner
