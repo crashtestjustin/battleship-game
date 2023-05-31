@@ -83,3 +83,24 @@ test("sink all ships and get shipsSunk value of 5", () => {
   expect(shipsSunk).toBe(5);
   expect(gameboard.shipsLeft.length).toBe(0);
 });
+
+test("No duplicate coordinate pairs in boardArray", () => {
+  const gameboard = gameboardFactory();
+  gameboard.placeShipsRandom();
+
+  const boardArray = gameboard.boardArray;
+
+  const allCoordinates = boardArray.reduce((acc, coordinates) => {
+    return acc.concat(coordinates);
+  }, []);
+
+  const duplicateCoordinates = allCoordinates.filter((coord, index) => {
+    return (
+      allCoordinates.findIndex(
+        (c) => c[0] === coord[0] && c[1] === coord[1]
+      ) !== index
+    );
+  });
+
+  expect(duplicateCoordinates).toEqual([]);
+});
