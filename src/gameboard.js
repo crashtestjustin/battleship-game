@@ -35,7 +35,11 @@ export const gameboardFactory = () => {
       );
 
       if (shipCoordinates) {
-        return shipCoordinates;
+        if (this.checkForShipOverlap(shipCoordinates)) {
+          return this.placeShipRecursive(shipObj, isVertical);
+        } else {
+          return shipCoordinates;
+        }
       } else {
         return this.placeShipRecursive(shipObj, isVertical);
       }
@@ -65,16 +69,45 @@ export const gameboardFactory = () => {
       return coorindates;
     },
 
+    checkForShipOverlap: function (newShipCoordinates) {
+      for (let i = 0; i < this.shipObjects.length; i++) {
+        const existingShipCoordinates = this.shipObjects[i].location;
+        for (let j = 0; j < newShipCoordinates.length; j++) {
+          const newCoord = newShipCoordinates[j];
+          for (let k = 0; k < existingShipCoordinates.length; k++) {
+            const existingCoord = existingShipCoordinates[k];
+            if (
+              existingCoord[0] === newCoord[0] &&
+              existingCoord[1] === newCoord[1]
+            ) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    },
+
     compareArrays: function (a, b) {
       let overlap = false;
       if (b === undefined) {
         for (let i = 0; i < this.boardArray.length; i++) {
-          if (
-            this.boardArray[i].some(
-              (coord) => coord[0] === a[0] && coord[1] === a[1]
-            )
-          ) {
-            overlap = true;
+          const coordinates = this.boardArray[i];
+          for (let j = 0; j < coordinates.length; j++) {
+            if (coordinates[j][0] === a[0] && coordinates[j][1] === a[1]) {
+              overlap = true;
+              break;
+            }
+          }
+          // if (
+          //   this.boardArray[i].some(
+          //     (coord) => coord[0] === a[0] && coord[1] === a[1]
+          //   )
+          // ) {
+          //   overlap = true;
+          //   break;
+          // }
+          if (overlap) {
             break;
           }
         }
