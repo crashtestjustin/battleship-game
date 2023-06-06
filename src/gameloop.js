@@ -3,13 +3,23 @@ import { playerFactory } from "./player";
 export function newGameLoop() {
   const bodyTitle = document.querySelector(".body-title");
   const startGame = document.querySelector(".start-game");
+  const allGridSq = document.querySelectorAll(".grid-square");
+  const pGridSquares = document.querySelectorAll(".p-grid");
+  const cGridSquares = document.querySelectorAll(".c-grid");
+
+  //Game Initiation (with random ship placement)
   startGame.addEventListener("click", (e) => {
-    const pGridSquares = document.querySelectorAll(".p-grid");
-    pGridSquares.forEach((sq) => {
+    if (attackListener) {
+      cGridSquares.forEach((square) => {
+        square.removeEventListener("click", attackListener);
+      });
+    }
+    allGridSq.forEach((sq) => {
       sq.style.backgroundColor = "transparent";
     });
+
     const userPlayer = playerFactory(document.querySelector("#name").value);
-    const cpuPlayer = playerFactory();
+    const cpuPlayer = playerFactory("CPU");
     userPlayer.oponentGameboard.placeShipsRandom();
     cpuPlayer.oponentGameboard.placeShipsRandom();
     cpuPlayer.oponentGameboard.boardArray.forEach((ship) => {
@@ -25,18 +35,38 @@ export function newGameLoop() {
         }
       });
     });
+    //console logging ship locations
     for (let s = 0; s < cpuPlayer.oponentGameboard.shipObjects.length; s++) {
+      console.log(cpuPlayer.oponentGameboard.shipObjects[s]);
       console.log(cpuPlayer.oponentGameboard.shipObjects[s].location);
     }
-    // while (
-    //   userPlayer.oponentGameboard.shipsSunk < 5 ||
-    //   cpuPlayer.oponentGameboard.shipsSunk < 5
-    // ) {
-    //   bodyTitle.textContent = `Awaiting ${userPlayer.name}'s Attack`;
+    //attack loop
+    if (
+      userPlayer.oponentGameboard.shipsSunk < 5 ||
+      cpuPlayer.oponentGameboard.shipsSunk < 5
+    ) {
+      bodyTitle.textContent = `Awaiting ${userPlayer.name}'s Attack`;
 
-    // }
+      attackListener = true;
+      cGridSquares.forEach((square) => {
+        square.addEventListener("click", (e) => {
+          const playerTurn = cpuPlayer.submitAttack(JSON.parse(e.target.id));
+          console.log(playerTurn);
+          if (playerTurn === null) {
+            square.style.backgroundColor = "#1515d4";
+            square.textContent = "·";
+          } else {
+            square.style.backgroundColor = "#d47974";
+            square.textContent = "X";
+          }
+        });
+      });
+    } else {
+      console.log("GAME OVER");
+    }
   });
 }
 
-//using while loop to run through plaer guess and cpu random guess
+//need to remove error where previous event listener is still active even when a new game is started
+//using while loop to run through player guess and cpu random guess
 //once one of the board's shipsSunk is 5 => run a determination for a winner
