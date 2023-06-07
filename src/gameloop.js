@@ -93,5 +93,6 @@ export function newGameLoop() {
   });
 }
 
+//need to update the CPU attack turns and apply styling as needed
 //need to fix logic for once one of the board's shipsSunk is 5 => run a determination for a winner
 //need to prevent user from sleecting previously selected squares (causes increment hit counter on same square)
