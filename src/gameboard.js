@@ -161,7 +161,7 @@ export const gameboardFactory = () => {
         }
       } else {
         this.missedGuesses.push(coordinates);
-        return null;
+        return coordinates;
       }
     },
   };
