@@ -18,6 +18,13 @@ export const playerFactory = (name) => {
     },
 
     submitAttack: function (attackCoordinate) {
+      if (
+        attackCoordinate !== undefined &&
+        this.checkAttackHist(attackCoordinate)
+      ) {
+        console.log("invalid guess");
+        return "invalid guess";
+      }
       if (attackCoordinate === undefined) {
         let newAttack;
         do {
