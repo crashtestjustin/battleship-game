@@ -1,4 +1,5 @@
 import { playerFactory } from "./player";
+import { nameValidation } from "./domActions";
 
 export function newGameLoop() {
   const bodyTitle = document.querySelector(".body-title");
@@ -31,6 +32,8 @@ export function newGameLoop() {
         }
       });
     });
+
+    bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
 
     //console logging ship locations
 
