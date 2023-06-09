@@ -33,16 +33,31 @@ export function newGameLoop() {
       });
     });
 
+    //updating header to name active player's turn
     bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
 
     //console logging ship locations
 
-    for (let s = 0; s < cpuPlayer.oponentGameboard.shipObjects.length; s++) {
-      console.log(cpuPlayer.oponentGameboard.shipObjects[s]);
-      console.log(cpuPlayer.oponentGameboard.shipObjects[s].location);
-    }
-    console.log(userPlayer.oponentGameboard.shipsSunk); //0
+    // for (let s = 0; s < cpuPlayer.oponentGameboard.shipObjects.length; s++) {
+    //   console.log(cpuPlayer.oponentGameboard.shipObjects[s]);
+    //   console.log(cpuPlayer.oponentGameboard.shipObjects[s].location);
+    // }
 
     //attack loop
+    console.log("opponent ships");
+    console.log(`Ships Sunk: ${userPlayer.oponentGameboard.shipsSunk}`); //0
+
+    console.log(userPlayer.oponentGameboard.boardArray);
+    for (let i = 0; i < userPlayer.oponentGameboard.shipObjects.length; i++) {
+      console.log(userPlayer.oponentGameboard.shipObjects[i].location);
+    }
+
+    cGridSquares.forEach((square) => {
+      square.addEventListener("click", (e) => {
+        const attack = userPlayer.submitAttack(JSON.parse(e.target.id));
+      });
+    });
+
+    //end
   });
 }
