@@ -54,6 +54,8 @@ export function newGameLoop() {
 
     let activePlayerAttack;
 
+    //this player attack and the below CPU attack need to be wrapped in a while loop until the
+    //activePlayerAttack returns 5
     cGridSquares.forEach((square) => {
       square.addEventListener("click", (e) => {
         activePlayerAttack = userPlayer.submitAttack(JSON.parse(e.target.id));
