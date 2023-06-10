@@ -78,6 +78,29 @@ export function newGameLoop() {
       });
     });
 
+    bodyTitle.textContent = `Awaiting ${cpuPlayer.name}'s attack.`;
+
+    setTimeout(function () {
+      activePlayerAttack = cpuPlayer.submitAttack();
+      //how do I get the coordinate the CPU used to attack????
+      if (activePlayerAttack === "invalid guess") {
+        return activePlayerAttack;
+      }
+      if (activePlayerAttack === 5) {
+        square.style.backgroundColor = "red";
+        console.log("Game Over");
+      }
+      if (Array.isArray(activePlayerAttack)) {
+        square.style.backgroundColor = "#b3b3cc";
+        console.log("MISS");
+      }
+      if (!Array.isArray(activePlayerAttack)) {
+        square.style.backgroundColor = "red";
+        console.log(activePlayerAttack.name);
+        console.log(activePlayerAttack.hitCount);
+        console.log(activePlayerAttack.sunk);
+      }
+    }, 5000);
     //end
   });
 }
