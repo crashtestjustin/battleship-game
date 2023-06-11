@@ -71,12 +71,12 @@ export function newGameLoop() {
 
         setTimeout(function () {
           activePlayerAttack = cpuPlayer.submitAttack();
-          //how do I get the coordinate the CPU used to attack????
           if (activePlayerAttack === "invalid guess") {
             return activePlayerAttack;
           }
           if (activePlayerAttack === 5) {
             coor.style.backgroundColor = "red";
+            //need to break out to determine winner
             console.log("Game Over");
           }
           if (Array.isArray(activePlayerAttack)) {
@@ -92,18 +92,19 @@ export function newGameLoop() {
             console.log("MISS");
           }
           if (!Array.isArray(activePlayerAttack)) {
+            let attackCoor = cpuPlayer.attackHistory.slice(-1);
+
             pGridSquares.forEach((loc) => {
-              let gridC = JSON.parse(loc.id);
-              let attackCoor = cpuPlayer.attackHistory.slice(-1);
-              if (gridC[0] === attackCoor[0] && gridC[1] === attackCoor[1]) {
+              let gridSquare = JSON.parse(loc.id);
+              if (
+                gridSquare[0] === attackCoor[0][0] &&
+                gridSquare[1] === attackCoor[0][1]
+              ) {
                 loc.style.backgroundColor = "red";
               }
             });
+
             console.log(activePlayerAttack);
-            console.log(cpuPlayer.attackHistory);
-            console.log(activePlayerAttack.name);
-            console.log(activePlayerAttack.hitCount);
-            console.log(activePlayerAttack.sunk);
           }
         }, 2000);
         bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
