@@ -36,6 +36,12 @@ export const playerFactory = (name) => {
       this.attackHistory.push(attackCoordinate);
       return attack;
     },
+
+    announceAsWinner: function () {
+      const announcement = `${this.name} has won the game!`;
+      console.log(announcement);
+      return announcement;
+    },
   };
   return player;
 };
