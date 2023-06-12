@@ -42,11 +42,6 @@ export function newGameLoop() {
     //attack loop
     cGridSquares.forEach((square) => {
       square.addEventListener("click", (e) => {
-        // if (!gameInProgress) {
-        //   bodyTitle.textContent = cpuPlayer.announceAsWinner();
-        //   return;
-        // }
-
         bodyTitle.textContent = `Awaiting ${cpuPlayer.name}'s attack.`;
         activePlayerAttack = userPlayer.submitAttack(JSON.parse(e.target.id));
 
