@@ -1,5 +1,5 @@
 import { playerFactory } from "./player";
-import { nameValidation } from "./domActions";
+import {} from "./domActions";
 
 export function newGameLoop() {
   const bodyTitle = document.querySelector(".body-title");
@@ -36,18 +36,18 @@ export function newGameLoop() {
     //updating header to name active player's turn
     bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
 
-    console.log(userPlayer.oponentGameboard.boardArray);
-    for (let i = 0; i < userPlayer.oponentGameboard.shipObjects.length; i++) {
-      console.log(userPlayer.oponentGameboard.shipObjects[i].location);
-    }
-
     let activePlayerAttack;
+    let gameInProgress = true;
 
     //attack loop
-    //this player attack and the below CPU attack need to be wrapped in a while loop until the
-    //activePlayerAttack returns 5
     cGridSquares.forEach((square) => {
       square.addEventListener("click", (e) => {
+        // if (!gameInProgress) {
+        //   bodyTitle.textContent = cpuPlayer.announceAsWinner();
+        //   return;
+        // }
+
+        bodyTitle.textContent = `Awaiting ${cpuPlayer.name}'s attack.`;
         activePlayerAttack = userPlayer.submitAttack(JSON.parse(e.target.id));
 
         if (activePlayerAttack === "invalid guess") {
@@ -56,28 +56,44 @@ export function newGameLoop() {
         if (activePlayerAttack === 5) {
           square.style.backgroundColor = "red";
           console.log("Game Over");
+          gameInProgress = false;
         }
         if (Array.isArray(activePlayerAttack)) {
           square.style.backgroundColor = "#b3b3cc";
           console.log("MISS");
         }
-        if (!Array.isArray(activePlayerAttack)) {
+        if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
           square.style.backgroundColor = "red";
-          console.log(activePlayerAttack.name);
-          console.log(activePlayerAttack.hitCount);
-          console.log(activePlayerAttack.sunk);
+          console.log(activePlayerAttack);
         }
-        bodyTitle.textContent = `Awaiting ${cpuPlayer.name}'s attack.`;
+
+        if (!gameInProgress) {
+          bodyTitle.textContent = userPlayer.announceAsWinner();
+          return;
+        }
 
         setTimeout(function () {
           activePlayerAttack = cpuPlayer.submitAttack();
+
           if (activePlayerAttack === "invalid guess") {
             return activePlayerAttack;
           }
           if (activePlayerAttack === 5) {
-            coor.style.backgroundColor = "red";
-            //need to break out to determine winner
+            let attackCoor = cpuPlayer.attackHistory.slice(-1);
+
+            pGridSquares.forEach((loc) => {
+              let gridSquare = JSON.parse(loc.id);
+              if (
+                gridSquare[0] === attackCoor[0][0] &&
+                gridSquare[1] === attackCoor[0][1]
+              ) {
+                loc.style.backgroundColor = "red";
+              }
+            });
             console.log("Game Over");
+            bodyTitle.textContent = cpuPlayer.announceAsWinner();
+            gameInProgress = false;
+            return;
           }
           if (Array.isArray(activePlayerAttack)) {
             pGridSquares.forEach((coor) => {
@@ -91,7 +107,7 @@ export function newGameLoop() {
             });
             console.log("MISS");
           }
-          if (!Array.isArray(activePlayerAttack)) {
+          if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
             let attackCoor = cpuPlayer.attackHistory.slice(-1);
 
             pGridSquares.forEach((loc) => {
@@ -106,10 +122,16 @@ export function newGameLoop() {
 
             console.log(activePlayerAttack);
           }
-        }, 2000);
-        bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
+          bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
+        }, 500);
       });
+      return;
     });
     //end
   });
 }
+
+// console.log(userPlayer.oponentGameboard.boardArray);
+// for (let i = 0; i < userPlayer.oponentGameboard.shipObjects.length; i++) {
+//   console.log(userPlayer.oponentGameboard.shipObjects[i].location);
+// }
