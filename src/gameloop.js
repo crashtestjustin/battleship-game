@@ -130,8 +130,3 @@ export function newGameLoop() {
     //end
   });
 }
-
-// console.log(userPlayer.oponentGameboard.boardArray);
-// for (let i = 0; i < userPlayer.oponentGameboard.shipObjects.length; i++) {
-//   console.log(userPlayer.oponentGameboard.shipObjects[i].location);
-// }
