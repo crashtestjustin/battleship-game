@@ -57,23 +57,23 @@ export function newGameLoop() {
         }
         if (Array.isArray(activePlayerAttack)) {
           square.style.backgroundColor = "#b3b3cc";
-          cMoveResult.textContent = "MISS! ❌";
+          cMoveResult.textContent = "You Missed! ❌";
           console.log("MISS");
         }
         if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
           square.style.backgroundColor = "red";
           console.log(activePlayerAttack);
           if (activePlayerAttack.sunk) {
-            cMoveResult.textContent = `${activePlayerAttack.name} Sunk!`;
+            cMoveResult.textContent = `You sunk their ${activePlayerAttack.name}!`;
           } else {
-            cMoveResult.textContent = "Hit! ✅";
+            cMoveResult.textContent = "You hit a ship! 🫡";
           }
         }
 
         if (!gameInProgress) {
           bodyTitle.textContent = userPlayer.announceAsWinner();
-          cMoveResult.textContent = "(LOSER)";
-          pMoveResult.textContent = "(WINNER!)";
+          cMoveResult.textContent = "(CPU = LOSER)";
+          pMoveResult.textContent = "(You = WINNER!)";
           return;
         }
 
@@ -97,8 +97,8 @@ export function newGameLoop() {
             });
             console.log("Game Over");
             bodyTitle.textContent = cpuPlayer.announceAsWinner();
-            pMoveResult.textContent = "(LOSER)";
-            cMoveResult.textContent = "(WINNER!)";
+            pMoveResult.textContent = "(You = LOSER)";
+            cMoveResult.textContent = "(CPU = WINNER!)";
             gameInProgress = false;
             return;
           }
@@ -112,7 +112,7 @@ export function newGameLoop() {
                 coor.style.backgroundColor = "#b3b3cc";
               }
             });
-            pMoveResult.textContent = "MISS! ❌";
+            pMoveResult.textContent = "CPU Missed! ❌";
             console.log("MISS");
           }
           if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
@@ -129,7 +129,11 @@ export function newGameLoop() {
             });
 
             console.log(activePlayerAttack);
-            pMoveResult.textContent = "Hit! ✅";
+            if (activePlayerAttack.sunk) {
+              pMoveResult.textContent = `CPU has sunk your ${activePlayerAttack.name}! 🥲🪦`;
+            } else {
+              pMoveResult.textContent = "CPU has hit a ship! 😬";
+            }
           }
           bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
         }, 500);
