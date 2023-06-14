@@ -1,4 +1,6 @@
 :root {
+  --larger-title: 1.2rem;
+  --title-weight: 600;
 }
 
 body {
@@ -32,6 +34,8 @@ body {
 .body-title {
   text-align: center;
   padding-top: 0.5rem;
+  font-size: var(--larger-title);
+  font-weight: var(--title-weight);
 }
 
 .game-inputs {
@@ -64,18 +68,28 @@ body {
 
 .board-titles {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-.c-board-titles {
-  margin-top: 1.5rem;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-items: end;
+  row-gap: 4px;
 }
 
 .player-board-title,
 .cpu-board-title {
-  justify-self: start;
+  font-size: var(--larger-title);
+  font-weight: var(--title-weight);
+}
+
+.move-result {
+  display: flex;
+  justify-self: end;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.c-board-titles {
+  margin-top: 1.5rem;
 }
 
 .board-div {
