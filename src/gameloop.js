@@ -7,6 +7,8 @@ export function newGameLoop() {
   const allGridSq = document.querySelectorAll(".grid-square");
   const pGridSquares = document.querySelectorAll(".p-grid");
   const cGridSquares = document.querySelectorAll(".c-grid");
+  const pMoveResult = document.querySelector(".p-move-result");
+  const cMoveResult = document.querySelector(".c-move-result");
 
   //Game Initiation (with random ship placement)
   startGame.addEventListener("click", (e) => {
@@ -55,15 +57,23 @@ export function newGameLoop() {
         }
         if (Array.isArray(activePlayerAttack)) {
           square.style.backgroundColor = "#b3b3cc";
+          cMoveResult.textContent = "MISS! ❌";
           console.log("MISS");
         }
         if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
           square.style.backgroundColor = "red";
           console.log(activePlayerAttack);
+          if (activePlayerAttack.sunk) {
+            cMoveResult.textContent = `${activePlayerAttack.name} Sunk!`;
+          } else {
+            cMoveResult.textContent = "Hit! ✅";
+          }
         }
 
         if (!gameInProgress) {
           bodyTitle.textContent = userPlayer.announceAsWinner();
+          cMoveResult.textContent = "(LOSER)";
+          pMoveResult.textContent = "(WINNER!)";
           return;
         }
 
@@ -87,6 +97,8 @@ export function newGameLoop() {
             });
             console.log("Game Over");
             bodyTitle.textContent = cpuPlayer.announceAsWinner();
+            pMoveResult.textContent = "(LOSER)";
+            cMoveResult.textContent = "(WINNER!)";
             gameInProgress = false;
             return;
           }
@@ -100,6 +112,7 @@ export function newGameLoop() {
                 coor.style.backgroundColor = "#b3b3cc";
               }
             });
+            pMoveResult.textContent = "MISS! ❌";
             console.log("MISS");
           }
           if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
@@ -116,6 +129,7 @@ export function newGameLoop() {
             });
 
             console.log(activePlayerAttack);
+            pMoveResult.textContent = "Hit! ✅";
           }
           bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
         }, 500);
