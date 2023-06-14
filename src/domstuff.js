@@ -36,8 +36,18 @@ export function body() {
   const startGameButton = createButton("start-game", "Start Game");
   gameInputs.append(inputTitle, playerName, startGameButton);
 
+  const boardSection = createDiv("board-section");
+
+  const pBoardSection = createDiv("board-titles");
+  pBoardSection.classList.add("p-board-titles");
+
   const playerBoardTitle = createDiv("player-board-title");
   playerBoardTitle.textContent = "Your Ships";
+  pBoardSection.appendChild(playerBoardTitle);
+
+  const playerMoveResult = createDiv("move-result");
+  playerMoveResult.textContent = "⛴️";
+  pBoardSection.appendChild(playerMoveResult);
 
   const boardDiv = createDiv("board-div");
   boardDiv.classList.add("player-board");
@@ -50,8 +60,16 @@ export function body() {
     boardDiv.appendChild(boardSquare);
   }
 
+  const cBoardSection = createDiv("board-titles");
+  cBoardSection.classList.add("c-board-titles");
+
   const cpuBoardTitle = createDiv("cpu-board-title");
-  cpuBoardTitle.textContent = "Sink the Enemy Ships";
+  cpuBoardTitle.textContent = "Sink Enemy Ships!";
+  cBoardSection.appendChild(cpuBoardTitle);
+
+  const cpuMoveResult = createDiv("move-result");
+  cpuMoveResult.textContent = "⛴️";
+  cBoardSection.appendChild(cpuMoveResult);
 
   const cpuBoardDiv = createDiv("board-div");
   cpuBoardDiv.classList.add("cpu-board");
@@ -64,14 +82,10 @@ export function body() {
     cpuBoardDiv.appendChild(boardSquare);
   }
 
+  boardSection.append(pBoardSection, boardDiv, cBoardSection, cpuBoardDiv);
+
   section.appendChild(title);
-  section.append(
-    gameInputs,
-    playerBoardTitle,
-    boardDiv,
-    cpuBoardTitle,
-    cpuBoardDiv
-  );
+  section.append(gameInputs, boardSection);
 
   return section;
 }
