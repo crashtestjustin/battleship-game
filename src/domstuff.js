@@ -42,7 +42,7 @@ export function body() {
   pBoardSection.classList.add("p-board-titles");
 
   const playerBoardTitle = createDiv("player-board-title");
-  playerBoardTitle.textContent = "Your Ships";
+  playerBoardTitle.textContent = "Your Fleet";
   pBoardSection.appendChild(playerBoardTitle);
 
   const playerMoveResult = createDiv("move-result");
