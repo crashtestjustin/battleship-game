@@ -46,6 +46,7 @@ export function body() {
   pBoardSection.appendChild(playerBoardTitle);
 
   const playerMoveResult = createDiv("move-result");
+  playerMoveResult.classList.add("p-move-result");
   playerMoveResult.textContent = "⛴️";
   pBoardSection.appendChild(playerMoveResult);
 
@@ -68,6 +69,7 @@ export function body() {
   cBoardSection.appendChild(cpuBoardTitle);
 
   const cpuMoveResult = createDiv("move-result");
+  cpuMoveResult.classList.add("c-move-result");
   cpuMoveResult.textContent = "⛴️";
   cBoardSection.appendChild(cpuMoveResult);
 
