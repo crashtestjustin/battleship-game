@@ -6,14 +6,13 @@
 body {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 
-.header,
-.footer {
-  margin: 1rem 0;
+.application {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .header {
@@ -115,7 +114,7 @@ body {
 }
 
 .footer {
+  display: flex;
   background-color: lightgray;
-  position: sticky;
-  bottom: 0;
+  margin-top: auto;
 }
