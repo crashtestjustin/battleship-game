@@ -86,8 +86,30 @@ export function body() {
 
   boardSection.append(pBoardSection, boardDiv, cBoardSection, cpuBoardDiv);
 
+  const shipLists = createDiv("ship-lists");
+
+  const playerList = createDiv("player-list");
+
+  const pShipTitle = createDiv("ships-title");
+  pShipTitle.textContent = "Your Ships Left";
+
+  const pShipList = createDiv("p-ship-list");
+  pShipList.textContent = "DEMO";
+
+  const cpuList = createDiv("cpu-list");
+
+  const cShipTitle = createDiv("ships-title");
+  cShipTitle.textContent = "CPU Ships Left";
+
+  const cShipList = createDiv("c-ship-list");
+  cShipList.textContent = "DEMO";
+
+  playerList.append(pShipTitle, pShipList);
+  cpuList.append(cShipTitle, cShipList);
+  shipLists.append(playerList, cpuList);
+
   section.appendChild(title);
-  section.append(gameInputs, boardSection);
+  section.append(gameInputs, boardSection, shipLists);
 
   return section;
 }
