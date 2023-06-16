@@ -1,9 +1,4 @@
 //DOM functionality below here
-const bodyTitle = document.querySelector(".body-title");
-const startGame = document.querySelector(".start-game");
-const allGridSq = document.querySelectorAll(".grid-square");
-const pGridSquares = document.querySelectorAll(".p-grid");
-const cGridSquares = document.querySelectorAll(".c-grid");
 
 export function nameValidation() {
   const playerName = document.querySelector("#name");
@@ -15,6 +10,8 @@ export function nameValidation() {
   }
   return true;
 }
+
+export function populateLists(playerShipList, cpuShipList) {}
 
 // import { playerFactory } from "./player";
 
