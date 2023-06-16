@@ -11,7 +11,42 @@ export function nameValidation() {
   return true;
 }
 
-export function populateLists(playerShipList, cpuShipList) {}
+export function populateLists(shipSunk, playerActive) {
+  const pShipList = document.querySelectorAll(".all-p-ships");
+  const cShipList = document.querySelectorAll(".all-c-ships");
+  if (shipSunk === undefined && playerActive === undefined) {
+    pShipList.forEach((ship) => {
+      ship.style.textDecoration = "none";
+      ship.style.opacity = "1";
+    });
+    cShipList.forEach((ship) => {
+      ship.style.textDecoration = "none";
+      ship.style.opacity = "1";
+    });
+    return;
+  }
+  if (playerActive === "CPU") {
+    pShipList.forEach((ship) => {
+      if (shipSunk === "final") {
+        ship.style.textDecoration = "line-through";
+        ship.style.opacity = "0.25";
+      } else if (ship.textContent === shipSunk.name) {
+        ship.style.textDecoration = "line-through";
+        ship.style.opacity = "0.25";
+      }
+    });
+  } else {
+    cShipList.forEach((ship) => {
+      if (shipSunk === "final") {
+        ship.style.textDecoration = "line-through";
+        ship.style.opacity = "0.25";
+      } else if (ship.textContent === shipSunk.name) {
+        ship.style.textDecoration = "line-through";
+        ship.style.opacity = "0.25";
+      }
+    });
+  }
+}
 
 // import { playerFactory } from "./player";
 
