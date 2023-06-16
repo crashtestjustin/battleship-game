@@ -105,7 +105,7 @@ export function body() {
   const pShipList = createDiv("p-ship-list");
   for (let p = 0; p < allShips.length; p++) {
     const pShip = createDiv(`${allShips[p]}`);
-    pShip.classList.add("all-ships-list");
+    pShip.classList.add("all-p-ships");
     pShip.textContent = `${allShips[p]}`;
     pShipList.appendChild(pShip);
   }
@@ -118,7 +118,7 @@ export function body() {
   const cShipList = createDiv("c-ship-list");
   for (let c = 0; c < allShips.length; c++) {
     const cShip = createDiv(`${allShips[c]}`);
-    cShip.classList.add("all-ships-list");
+    cShip.classList.add("all-c-ships");
     cShip.textContent = `${allShips[c]}`;
     cShipList.appendChild(cShip);
   }
