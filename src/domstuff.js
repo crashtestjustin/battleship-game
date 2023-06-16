@@ -1,4 +1,3 @@
-import { gameloop } from "./gameloop";
 import {
   createDiv,
   createButton,
