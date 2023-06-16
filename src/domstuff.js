@@ -6,6 +6,7 @@ import {
   createImg,
   generateCoor,
 } from "./helperfunctions";
+import { ship } from "./ship";
 
 export function header() {
   const section = createDiv("header");
@@ -86,6 +87,14 @@ export function body() {
 
   boardSection.append(pBoardSection, boardDiv, cBoardSection, cpuBoardDiv);
 
+  const allShips = [
+    "Carrier",
+    "Battleship",
+    "Destroyer",
+    "Submarine",
+    "Patrol Boat",
+  ];
+
   const shipLists = createDiv("ship-lists");
 
   const playerList = createDiv("player-list");
@@ -94,7 +103,12 @@ export function body() {
   pShipTitle.textContent = "Your Ships Left";
 
   const pShipList = createDiv("p-ship-list");
-  pShipList.textContent = "DEMO";
+  for (let p = 0; p < allShips.length; p++) {
+    const pShip = createDiv(`${allShips[p]}`);
+    pShip.classList.add("all-ships-list");
+    pShip.textContent = `${allShips[p]}`;
+    pShipList.appendChild(pShip);
+  }
 
   const cpuList = createDiv("cpu-list");
 
@@ -102,7 +116,12 @@ export function body() {
   cShipTitle.textContent = "CPU Ships Left";
 
   const cShipList = createDiv("c-ship-list");
-  cShipList.textContent = "DEMO";
+  for (let c = 0; c < allShips.length; c++) {
+    const cShip = createDiv(`${allShips[c]}`);
+    cShip.classList.add("all-ships-list");
+    cShip.textContent = `${allShips[c]}`;
+    cShipList.appendChild(cShip);
+  }
 
   playerList.append(pShipTitle, pShipList);
   cpuList.append(cShipTitle, cShipList);
