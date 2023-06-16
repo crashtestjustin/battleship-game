@@ -1,4 +1,5 @@
 import { playerFactory } from "./player";
+import { populateLists } from "./domActions";
 
 export function newGameLoop() {
   const bodyTitle = document.querySelector(".body-title");
@@ -36,6 +37,7 @@ export function newGameLoop() {
       console.log(activePlayerAttack);
       if (activePlayerAttack.sunk) {
         cMoveResult.textContent = `You sunk their ${activePlayerAttack.name}!`;
+        populateLists(activePlayerAttack, "user");
       } else {
         cMoveResult.textContent = "You hit a ship! 🫡";
       }
@@ -43,6 +45,7 @@ export function newGameLoop() {
 
     if (!gameInProgress) {
       bodyTitle.textContent = userPlayer.announceAsWinner();
+      populateLists("final", "user");
       cMoveResult.textContent = "(CPU = LOSER)";
       pMoveResult.textContent = "(You = WINNER!)";
       return;
@@ -68,6 +71,7 @@ export function newGameLoop() {
         });
         console.log("Game Over");
         bodyTitle.textContent = cpuPlayer.announceAsWinner();
+        populateLists("final", "CPU");
         pMoveResult.textContent = "(You = LOSER)";
         cMoveResult.textContent = "(CPU = WINNER!)";
         gameInProgress = false;
@@ -102,6 +106,7 @@ export function newGameLoop() {
         console.log(activePlayerAttack);
         if (activePlayerAttack.sunk) {
           pMoveResult.textContent = `CPU has sunk your ${activePlayerAttack.name}! 🥲🪦`;
+          populateLists(activePlayerAttack, "CPU");
         } else {
           pMoveResult.textContent = "CPU has hit a ship! 😬";
         }
@@ -117,6 +122,8 @@ export function newGameLoop() {
     allGridSq.forEach((sq) => {
       sq.style.backgroundColor = "transparent";
     });
+
+    populateLists();
 
     userPlayer = playerFactory(document.querySelector("#name").value);
     cpuPlayer = playerFactory("CPU");
