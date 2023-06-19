@@ -1,5 +1,5 @@
 import { playerFactory } from "./player";
-import { populateLists } from "./domActions";
+import { populateLists, ShipSunkFormat } from "./domActions";
 
 export function newGameLoop() {
   const bodyTitle = document.querySelector(".body-title");
@@ -38,6 +38,7 @@ export function newGameLoop() {
       if (activePlayerAttack.sunk) {
         cMoveResult.textContent = `You sunk their ${activePlayerAttack.name}!`;
         populateLists(activePlayerAttack, "user");
+        ShipSunkFormat(activePlayerAttack);
       } else {
         cMoveResult.textContent = "You hit a ship! 🫡";
       }
@@ -113,6 +114,7 @@ export function newGameLoop() {
         if (activePlayerAttack.sunk) {
           pMoveResult.textContent = `CPU has sunk your ${activePlayerAttack.name}! 🥲🪦`;
           populateLists(activePlayerAttack, "CPU");
+          ShipSunkFormat(activePlayerAttack);
         } else {
           pMoveResult.textContent = "CPU has hit a ship! 😬";
         }
