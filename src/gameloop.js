@@ -23,17 +23,17 @@ export function newGameLoop() {
       return activePlayerAttack;
     }
     if (activePlayerAttack === 5) {
-      e.target.style.backgroundColor = "red";
+      e.target.style.backgroundColor = "var(--hit-attack)";
       console.log("Game Over");
       gameInProgress = false;
     }
     if (Array.isArray(activePlayerAttack)) {
-      e.target.style.backgroundColor = "#b3b3cc";
+      e.target.style.backgroundColor = "var(--missed-attack)";
       cMoveResult.textContent = "You Missed! ❌";
       console.log("MISS");
     }
     if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
-      e.target.style.backgroundColor = "red";
+      e.target.style.backgroundColor = "var(--hit-attack)";
       console.log(activePlayerAttack);
       if (activePlayerAttack.sunk) {
         cMoveResult.textContent = `You sunk their ${activePlayerAttack.name}!`;
@@ -75,7 +75,7 @@ export function newGameLoop() {
             gridSquare[0] === attackCoor[0][0] &&
             gridSquare[1] === attackCoor[0][1]
           ) {
-            loc.style.backgroundColor = "red";
+            loc.style.backgroundColor = "var(--hit-attack)";
           }
         });
         console.log("Game Over");
@@ -101,7 +101,7 @@ export function newGameLoop() {
             activePlayerAttack[0] === gridCoor[0] &&
             activePlayerAttack[1] === gridCoor[1]
           ) {
-            coor.style.backgroundColor = "#b3b3cc";
+            coor.style.backgroundColor = "var(--missed-attack)";
           }
         });
         pMoveResult.textContent = "CPU Missed! ❌";
@@ -116,7 +116,7 @@ export function newGameLoop() {
             gridSquare[0] === attackCoor[0][0] &&
             gridSquare[1] === attackCoor[0][1]
           ) {
-            loc.style.backgroundColor = "red";
+            loc.style.backgroundColor = "var(--hit-attack)";
           }
         });
 
@@ -157,7 +157,7 @@ export function newGameLoop() {
             shipCoordinate[0] === square[0] &&
             shipCoordinate[1] === square[1]
           ) {
-            pGridSquares[i].style.backgroundColor = "#7faec9";
+            pGridSquares[i].style.backgroundColor = "var(--ship-color)";
           }
         }
       });
