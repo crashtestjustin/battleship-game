@@ -3,6 +3,10 @@
   --title-weight: 600;
   --larger-screen-title: 1.5rem;
   --header-color: #9ecbf5;
+  --missed-attack: #a2a2bcae;
+  --hit-attack: rgba(255, 88, 88, 0.734);
+  --sunk-attack: rgba(250, 46, 46, 0.734);
+  --ship-color: #599fc8ae;
 }
 
 body {
