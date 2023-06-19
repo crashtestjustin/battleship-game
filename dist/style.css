@@ -58,7 +58,7 @@ body {
 
 .game-inputs input {
   height: 1.5rem;
-  background-color: bisque;
+  background-color: rgb(239, 238, 238);
   padding-left: 0.5rem;
 }
 
