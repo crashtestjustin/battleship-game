@@ -2,12 +2,14 @@
   --larger-title: 1.2rem;
   --title-weight: 600;
   --larger-screen-title: 1.5rem;
+  --header-color: #9ecbf5;
 }
 
 body {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
   min-height: 100vh;
+  background-color: #cce6ff;
 }
 
 .application {
@@ -17,9 +19,11 @@ body {
 }
 
 .header {
-  background-color: lightskyblue;
+  background-color: var(--header-color);
   text-align: center;
   font-size: 2rem;
+  padding: 2rem 0;
+  font-weight: var(--title-weight);
 }
 
 .body {
@@ -187,7 +191,7 @@ body {
     row-gap: 10px;
     justify-items: center;
     width: 100%;
-    background-color: aqua;
+    background-color: #e6e6e6;
     border: 2px solid #000000;
     padding: 10px 0;
   }
@@ -205,4 +209,22 @@ body {
     font-size: var(--larger-title);
     font-weight: var(--title-weight);
   }
+}
+
+.footer {
+  justify-content: center;
+  padding: 2rem 0;
+  font-size: 1.5rem;
+  box-shadow: 0 -1px -3px #025195;
+  background-color: var(--header-color);
+  font-weight: var(--title-weight);
+}
+
+.title a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.title a:hover {
+  text-decoration: underline;
 }
