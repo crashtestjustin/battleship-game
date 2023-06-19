@@ -1,5 +1,7 @@
 //DOM functionality below here
 
+import { ship } from "./ship";
+
 export function nameValidation() {
   const playerName = document.querySelector("#name");
   if (playerName.value === null || playerName.value === undefined) {
@@ -12,6 +14,7 @@ export function nameValidation() {
 }
 
 export function populateLists(shipSunk, playerActive) {
+  console.log(shipSunk);
   const pShipList = document.querySelectorAll(".all-p-ships");
   const cShipList = document.querySelectorAll(".all-c-ships");
   if (shipSunk === undefined && playerActive === undefined) {
@@ -46,6 +49,18 @@ export function populateLists(shipSunk, playerActive) {
       }
     });
   }
+}
+
+export function ShipSunkFormat(shipSunk) {
+  const cGrid = document.querySelectorAll(".c-grid");
+  cGrid.forEach((grid) => {
+    const loc = JSON.parse(grid.id);
+    shipSunk.location.forEach((coor) => {
+      if (loc[0] === coor[0] && loc[1] === coor[1]) {
+        grid.textContent = "X";
+      }
+    });
+  });
 }
 
 // import { playerFactory } from "./player";
