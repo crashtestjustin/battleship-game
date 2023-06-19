@@ -62,6 +62,7 @@ export function ShipSunkFormat(shipSunk, playerActive, endGame) {
           ship.location.forEach((coor) => {
             if (coor[0] === loc[0] && coor[1] === loc[1]) {
               grid.textContent = "X";
+              grid.style.backgroundColor = "var(--sunk-attack)";
             }
           });
         });
@@ -72,6 +73,7 @@ export function ShipSunkFormat(shipSunk, playerActive, endGame) {
         shipSunk.location.forEach((coor) => {
           if (loc[0] === coor[0] && loc[1] === coor[1]) {
             grid.textContent = "X";
+            grid.style.backgroundColor = "var(--sunk-attack)";
           }
         });
       });
@@ -84,6 +86,7 @@ export function ShipSunkFormat(shipSunk, playerActive, endGame) {
           ship.location.forEach((coor) => {
             if (coor[0] === loc[0] && coor[1] === loc[1]) {
               grid.textContent = "X";
+              grid.style.backgroundColor = "var(--sunk-attack)";
             }
           });
         });
@@ -94,6 +97,7 @@ export function ShipSunkFormat(shipSunk, playerActive, endGame) {
         shipSunk.location.forEach((coor) => {
           if (loc[0] === coor[0] && loc[1] === coor[1]) {
             grid.textContent = "X";
+            grid.style.backgroundColor = "var(--sunk-attack)";
           }
         });
       });
