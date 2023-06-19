@@ -136,7 +136,15 @@ export function footer() {
   const section = createDiv("footer");
 
   const title = createDiv("title");
-  title.textContent = "Footer";
+
+  const text = document.createElement("span");
+  text.textContent = "Created by ";
+
+  const hyper = document.createElement("a");
+  hyper.href = "https://github.com/crashtestjustin/battleship-game";
+  hyper.textContent = "Justin Elliott";
+
+  title.append(text, hyper);
 
   section.appendChild(title);
 
