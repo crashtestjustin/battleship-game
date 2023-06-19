@@ -38,7 +38,7 @@ export function newGameLoop() {
       if (activePlayerAttack.sunk) {
         cMoveResult.textContent = `You sunk their ${activePlayerAttack.name}!`;
         populateLists(activePlayerAttack, "user");
-        ShipSunkFormat(activePlayerAttack);
+        ShipSunkFormat(activePlayerAttack, "user");
       } else {
         cMoveResult.textContent = "You hit a ship! 🫡";
       }
@@ -47,6 +47,11 @@ export function newGameLoop() {
     if (!gameInProgress) {
       bodyTitle.textContent = userPlayer.announceAsWinner();
       populateLists("final", "user");
+      ShipSunkFormat(
+        activePlayerAttack,
+        "user",
+        userPlayer.oponentGameboard.shipObjects
+      );
       cMoveResult.textContent = "(CPU = LOSER)";
       pMoveResult.textContent = "(You = WINNER!)";
       cGridSquares.forEach((spot) => {
@@ -76,6 +81,11 @@ export function newGameLoop() {
         console.log("Game Over");
         bodyTitle.textContent = cpuPlayer.announceAsWinner();
         populateLists("final", "CPU");
+        ShipSunkFormat(
+          activePlayerAttack,
+          "CPU",
+          cpuPlayer.oponentGameboard.shipObjects
+        );
         pMoveResult.textContent = "(You = LOSER)";
         cMoveResult.textContent = "(CPU = WINNER!)";
         gameInProgress = false;
@@ -114,7 +124,7 @@ export function newGameLoop() {
         if (activePlayerAttack.sunk) {
           pMoveResult.textContent = `CPU has sunk your ${activePlayerAttack.name}! 🥲🪦`;
           populateLists(activePlayerAttack, "CPU");
-          ShipSunkFormat(activePlayerAttack);
+          ShipSunkFormat(activePlayerAttack, "CPU");
         } else {
           pMoveResult.textContent = "CPU has hit a ship! 😬";
         }
@@ -129,6 +139,7 @@ export function newGameLoop() {
 
     allGridSq.forEach((sq) => {
       sq.style.backgroundColor = "transparent";
+      sq.textContent = "";
     });
 
     populateLists();
