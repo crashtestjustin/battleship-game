@@ -51,16 +51,54 @@ export function populateLists(shipSunk, playerActive) {
   }
 }
 
-export function ShipSunkFormat(shipSunk) {
+export function ShipSunkFormat(shipSunk, playerActive, endGame) {
   const cGrid = document.querySelectorAll(".c-grid");
-  cGrid.forEach((grid) => {
-    const loc = JSON.parse(grid.id);
-    shipSunk.location.forEach((coor) => {
-      if (loc[0] === coor[0] && loc[1] === coor[1]) {
-        grid.textContent = "X";
-      }
-    });
-  });
+  const pGrid = document.querySelectorAll(".p-grid");
+  if (playerActive === "user") {
+    if (endGame !== undefined) {
+      cGrid.forEach((grid) => {
+        const loc = JSON.parse(grid.id);
+        endGame.forEach((ship) => {
+          ship.location.forEach((coor) => {
+            if (coor[0] === loc[0] && coor[1] === loc[1]) {
+              grid.textContent = "X";
+            }
+          });
+        });
+      });
+    } else {
+      cGrid.forEach((grid) => {
+        const loc = JSON.parse(grid.id);
+        shipSunk.location.forEach((coor) => {
+          if (loc[0] === coor[0] && loc[1] === coor[1]) {
+            grid.textContent = "X";
+          }
+        });
+      });
+    }
+  } else {
+    if (endGame !== undefined) {
+      pGrid.forEach((grid) => {
+        const loc = JSON.parse(grid.id);
+        endGame.forEach((ship) => {
+          ship.location.forEach((coor) => {
+            if (coor[0] === loc[0] && coor[1] === loc[1]) {
+              grid.textContent = "X";
+            }
+          });
+        });
+      });
+    } else {
+      pGrid.forEach((grid) => {
+        const loc = JSON.parse(grid.id);
+        shipSunk.location.forEach((coor) => {
+          if (loc[0] === coor[0] && loc[1] === coor[1]) {
+            grid.textContent = "X";
+          }
+        });
+      });
+    }
+  }
 }
 
 // import { playerFactory } from "./player";
