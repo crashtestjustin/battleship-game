@@ -48,6 +48,9 @@ export function newGameLoop() {
       populateLists("final", "user");
       cMoveResult.textContent = "(CPU = LOSER)";
       pMoveResult.textContent = "(You = WINNER!)";
+      cGridSquares.forEach((spot) => {
+        spot.removeEventListener("click", clickEventListener);
+      });
       return;
     }
 
@@ -75,6 +78,9 @@ export function newGameLoop() {
         pMoveResult.textContent = "(You = LOSER)";
         cMoveResult.textContent = "(CPU = WINNER!)";
         gameInProgress = false;
+        cGridSquares.forEach((spot) => {
+          spot.removeEventListener("click", clickEventListener);
+        });
         return;
       }
       if (Array.isArray(activePlayerAttack)) {
