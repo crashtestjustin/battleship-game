@@ -146,8 +146,14 @@ export function newGameLoop() {
 
     userPlayer = playerFactory(document.querySelector("#name").value);
     cpuPlayer = playerFactory("CPU");
+
     userPlayer.oponentGameboard.placeShipsRandom();
-    cpuPlayer.oponentGameboard.placeShipsRandom();
+    const placeMode = document.querySelector("#radio2");
+    if (placeMode.checked) {
+      //placeships function from gameboard module
+    } else {
+      cpuPlayer.oponentGameboard.placeShipsRandom();
+    }
 
     cpuPlayer.oponentGameboard.boardArray.forEach((ship) => {
       ship.forEach((shipCoordinate) => {
