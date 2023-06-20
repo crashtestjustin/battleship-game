@@ -5,7 +5,6 @@ import {
   createImg,
   generateCoor,
 } from "./helperfunctions";
-import { ship } from "./ship";
 
 export function header() {
   const section = createDiv("header");
@@ -33,8 +32,22 @@ export function body() {
     "name",
     "Enter your name captain!"
   );
+
+  const radioDiv = createDiv("radio-div");
+  const label1 = document.createElement("label");
+  label1.innerHTML = "Random";
+  const randomSel = createInput("radio", "radio1", "option", "random");
+  randomSel.name = "option";
+
+  const label2 = document.createElement("label");
+  label2.innerHTML = "Place Ships";
+  const placeSel = createInput("radio", "radio2", "option", "place");
+  placeSel.name = "option";
+
+  radioDiv.append(label1, randomSel, label2, placeSel);
+
   const startGameButton = createButton("start-game", "Start Game");
-  gameInputs.append(inputTitle, playerName, startGameButton);
+  gameInputs.append(inputTitle, playerName, radioDiv, startGameButton);
 
   const boardSection = createDiv("board-section");
 
