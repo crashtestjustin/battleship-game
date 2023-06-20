@@ -148,8 +148,10 @@ export function newGameLoop() {
     cpuPlayer = playerFactory("CPU");
 
     userPlayer.oponentGameboard.placeShipsRandom();
+
     const placeMode = document.querySelector("#radio2");
     if (placeMode.checked) {
+      cpuPlayer.oponentGameboard.placeShips();
       //placeships function from gameboard module to be added
     } else {
       cpuPlayer.oponentGameboard.placeShipsRandom();
