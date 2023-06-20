@@ -34,17 +34,28 @@ export function body() {
   );
 
   const radioDiv = createDiv("radio-div");
+
+  const randomDiv = createDiv("random-div");
   const label1 = document.createElement("label");
   label1.innerHTML = "Random";
   const randomSel = createInput("radio", "radio1", "option", "random");
   randomSel.name = "option";
+  randomDiv.append(label1, randomSel);
 
+  const placeDiv = createDiv("place-div");
   const label2 = document.createElement("label");
   label2.innerHTML = "Place Ships";
   const placeSel = createInput("radio", "radio2", "option", "place");
   placeSel.name = "option";
+  placeDiv.append(label2, placeSel);
 
-  radioDiv.append(label1, randomSel, label2, placeSel);
+  const vertDiv = createDiv("vertical-select");
+  const label3 = document.createElement("label");
+  label3.innerHTML = "Vertical";
+  const vertical = createInput("checkbox", "is-vert", "checkbox");
+  vertDiv.append(label3, vertical);
+
+  radioDiv.append(randomDiv, placeDiv, vertDiv);
 
   const startGameButton = createButton("start-game", "Start Game");
   gameInputs.append(inputTitle, playerName, radioDiv, startGameButton);
