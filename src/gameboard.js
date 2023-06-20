@@ -122,6 +122,10 @@ export const gameboardFactory = () => {
       return overlap;
     },
 
+    placeShips: function () {
+      let shipLengths = [5, 4, 3, 3, 2];
+    },
+
     checkForAllSunk: function () {
       let sunkenShips = 0;
       for (let i = 0; i < this.shipObjects.length; i++) {
