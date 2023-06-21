@@ -125,8 +125,15 @@ export const gameboardFactory = () => {
     placeShips: function () {
       const isVert = document.querySelector("#is-vert");
       const pGrid = document.querySelectorAll(".p-grid");
+
       let shipLengths = [5, 4, 3, 3, 2];
       for (let i = 0; i < shipLengths.length; i++) {
+        pGrid.forEach((grid) => {
+          const gridLoc = JSON.parse(grid.id);
+          grid.addEventListener("mouseover", (e) => {
+            grid.getElementsByClassName.backgroundColor = "orange";
+          });
+        });
         //how to use mouseover to highlugh correct number of squares dependent on the isVert
         //eventListener for click to place - need to validate placement
       }
