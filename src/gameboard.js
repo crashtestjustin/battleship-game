@@ -45,6 +45,125 @@ export const gameboardFactory = () => {
       }
     },
 
+    placeShipsManual: function () {
+      const isVert = document.querySelector("#is-vert");
+      const pGrid = document.querySelectorAll(".p-grid");
+      const bodyTitle = document.querySelector(".body-title");
+      let shipIndex = 0;
+      let shipObjM;
+
+      const handleGridClick = (e) => {
+        const grid = e.target;
+        const gridLoc = JSON.parse(grid.id);
+        const shipName = this.shipsLeft[shipIndex];
+        shipObjM = ship(shipName);
+
+        let shipCoordinatesM;
+        if (isVert.checked) {
+          shipCoordinatesM = this.checkValidPlacement(shipObjM, gridLoc, true);
+        } else {
+          shipCoordinatesM = this.checkValidPlacement(shipObjM, gridLoc, false);
+        }
+
+        if (shipCoordinatesM) {
+          console.log(shipCoordinatesM);
+          // Valid placement, update gameboard
+          shipObjM.location = shipCoordinatesM;
+          this.shipObjects.push(shipObjM);
+          this.boardArray.push(shipCoordinatesM);
+          shipIndex++;
+
+          // Check if all ships are placed
+          if (shipIndex === this.shipsLeft.length) {
+            // All ships placed, remove event listeners
+            pGrid.forEach((grid) => {
+              grid.removeEventListener("click", handleGridClick);
+              grid.removeEventListener("mouseover", handleGridMouseOver);
+              grid.removeEventListener("mouseout", handleGridMouseOut);
+            });
+            return;
+            // Proceed with the game or perform any necessary actions
+            // after all ships are placed
+          } else {
+            // Update the text content for the next ship
+            bodyTitle.textContent = `Place your ${this.shipsLeft[shipIndex]}.`;
+          }
+        }
+      };
+
+      const handleGridMouseOver = (e) => {
+        const grid = e.target;
+        const gridLoc = JSON.parse(grid.id);
+        const shipName = this.shipsLeft[shipIndex];
+        const shipObj = ship(shipName);
+
+        if (isVert.checked) {
+          if (shipObj.location && shipObj.location.length > 0) {
+            shipObj.location.forEach((coord) => {
+              const cell = document.getElementById(JSON.stringify(coord));
+              cell.style.backgroundColor = "orange";
+            });
+          } else {
+            shipObj.location = this.checkValidPlacement(shipObj, gridLoc, true);
+            if (shipObj.location) {
+              shipObj.location.forEach((coord) => {
+                const cell = document.getElementById(JSON.stringify(coord));
+                cell.style.backgroundColor = "orange";
+              });
+            }
+          }
+        } else {
+          if (shipObj.location && shipObj.location.length > 0) {
+            shipObj.location.forEach((coord) => {
+              const cell = document.getElementById(JSON.stringify(coord));
+              cell.style.backgroundColor = "orange";
+            });
+          } else {
+            shipObj.location = this.checkValidPlacement(
+              shipObj,
+              gridLoc,
+              false
+            );
+            if (shipObj.location) {
+              shipObj.location.forEach((coord) => {
+                const cell = document.getElementById(JSON.stringify(coord));
+                cell.style.backgroundColor = "orange";
+              });
+            }
+          }
+        }
+      };
+
+      const handleGridMouseOut = (e) => {
+        const grid = e.target;
+        const gridLoc = JSON.parse(grid.id);
+        const shipName = this.shipsLeft[shipIndex];
+        const shipObj = ship(shipName);
+
+        if (isVert.checked) {
+          shipObj.location = this.checkValidPlacement(shipObj, gridLoc, true);
+        } else {
+          shipObj.location = this.checkValidPlacement(shipObj, gridLoc, false);
+        }
+
+        if (shipObj.location) {
+          shipObj.location.forEach((coord) => {
+            const cell = document.getElementById(JSON.stringify(coord));
+            cell.style.backgroundColor = "transparent";
+          });
+        }
+      };
+
+      pGrid.forEach((grid) => {
+        grid.addEventListener("click", handleGridClick);
+        grid.addEventListener("mouseover", handleGridMouseOver);
+        grid.addEventListener("mouseout", handleGridMouseOut);
+      });
+
+      // Set the initial ship title
+      bodyTitle.textContent = `Place your ${this.shipsLeft[0]}.`;
+    },
+
     checkValidPlacement: function (shipObj, startingCoordinates, isVertical) {
       let coorindates = [];
       coorindates.push(startingCoordinates);
@@ -120,23 +239,6 @@ export const gameboardFactory = () => {
         }
       }
       return overlap;
-    },
-
-    placeShips: function () {
-      const isVert = document.querySelector("#is-vert");
-      const pGrid = document.querySelectorAll(".p-grid");
-
-      let shipLengths = [5, 4, 3, 3, 2];
-      for (let i = 0; i < shipLengths.length; i++) {
-        pGrid.forEach((grid) => {
-          const gridLoc = JSON.parse(grid.id);
-          grid.addEventListener("mouseover", (e) => {
-            grid.getElementsByClassName.backgroundColor = "orange";
-          });
-        });
-        //how to use mouseover to highlugh correct number of squares dependent on the isVert
-        //eventListener for click to place - need to validate placement
-      }
     },
 
     checkForAllSunk: function () {
