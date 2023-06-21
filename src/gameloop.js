@@ -151,7 +151,7 @@ export function newGameLoop() {
 
     const placeMode = document.querySelector("#radio2");
     if (placeMode.checked) {
-      cpuPlayer.oponentGameboard.placeShips();
+      cpuPlayer.oponentGameboard.placeShipsManual();
       //placeships function from gameboard module to be added
     } else {
       cpuPlayer.oponentGameboard.placeShipsRandom();
@@ -172,7 +172,7 @@ export function newGameLoop() {
     });
 
     //updating header to name active player's turn
-    bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
+    // bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
 
     //Remove event listeners from cGridSquares
     cGridSquares.forEach((spot) => {
