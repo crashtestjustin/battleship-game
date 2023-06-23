@@ -46,7 +46,7 @@ export const gameboardFactory = () => {
       }
     },
 
-    placeShipsManual: function () {
+    placeShipsManual: function (callback) {
       const isVert = document.querySelector("#is-vert");
       const pGrid = document.querySelectorAll(".p-grid");
       const bodyTitle = document.querySelector(".body-title");
@@ -94,7 +94,7 @@ export const gameboardFactory = () => {
               grid.removeEventListener("mouseover", handleGridMouseOver);
               grid.removeEventListener("mouseout", handleGridMouseOut);
             });
-            return;
+            callback();
             // Proceed with the game or perform any necessary actions
             // after all ships are placed
           } else {

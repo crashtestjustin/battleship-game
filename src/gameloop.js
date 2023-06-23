@@ -151,39 +151,41 @@ export function newGameLoop() {
 
     const placeMode = document.querySelector("#radio2");
     if (placeMode.checked) {
-      cpuPlayer.oponentGameboard.placeShipsManual();
+      cpuPlayer.oponentGameboard.placeShipsManual(startGameLoop);
       //placeships function from gameboard module to be added
     } else {
       cpuPlayer.oponentGameboard.placeShipsRandom();
+      startGameLoop();
     }
 
-    cpuPlayer.oponentGameboard.boardArray.forEach((ship) => {
-      ship.forEach((shipCoordinate) => {
-        for (let i = 0; i < pGridSquares.length; i++) {
-          const square = JSON.parse(pGridSquares[i].id);
-          if (
-            shipCoordinate[0] === square[0] &&
-            shipCoordinate[1] === square[1]
-          ) {
-            pGridSquares[i].style.backgroundColor = "var(--ship-color)";
+    function startGameLoop() {
+      cpuPlayer.oponentGameboard.boardArray.forEach((ship) => {
+        ship.forEach((shipCoordinate) => {
+          for (let i = 0; i < pGridSquares.length; i++) {
+            const square = JSON.parse(pGridSquares[i].id);
+            if (
+              shipCoordinate[0] === square[0] &&
+              shipCoordinate[1] === square[1]
+            ) {
+              pGridSquares[i].style.backgroundColor = "var(--ship-color)";
+            }
           }
-        }
+        });
       });
-    });
 
-    //updating header to name active player's turn
-    // bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
+      //updating header to name active player's turn
+      bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
 
-    //Remove event listeners from cGridSquares
-    cGridSquares.forEach((spot) => {
-      spot.removeEventListener("click", clickEventListener);
-    });
+      //Remove event listeners from cGridSquares
+      cGridSquares.forEach((spot) => {
+        spot.removeEventListener("click", clickEventListener);
+      });
 
-    //Add new Event Listener
-    cGridSquares.forEach((square) => {
-      square.addEventListener("click", clickEventListener);
-    });
-
+      //Add new Event Listener
+      cGridSquares.forEach((square) => {
+        square.addEventListener("click", clickEventListener);
+      });
+    }
     //end
   });
 }
