@@ -6,3 +6,4 @@ To DO:
 
 - fix bug where starting a new random game after a manual placed game keeps the mouseover event listeners and
   clears out the random placed ships on the ui
+  - update manual placement styling
