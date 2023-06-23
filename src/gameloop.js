@@ -137,12 +137,20 @@ export function newGameLoop() {
   startGame.addEventListener("click", (e) => {
     gameInProgress = true;
 
+    pMoveResult.textContent = "⛴️";
+    cMoveResult.textContent = "⛴️";
+
     allGridSq.forEach((sq) => {
       sq.style.backgroundColor = "transparent";
       sq.textContent = "";
     });
 
     populateLists();
+
+    //Remove event listeners from cGridSquares
+    cGridSquares.forEach((spot) => {
+      spot.removeEventListener("click", clickEventListener);
+    });
 
     userPlayer = playerFactory(document.querySelector("#name").value);
     cpuPlayer = playerFactory("CPU");
@@ -175,11 +183,6 @@ export function newGameLoop() {
 
       //updating header to name active player's turn
       bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
-
-      //Remove event listeners from cGridSquares
-      cGridSquares.forEach((spot) => {
-        spot.removeEventListener("click", clickEventListener);
-      });
 
       //Add new Event Listener
       cGridSquares.forEach((square) => {
