@@ -4,4 +4,5 @@ Battleship game is my first project using primarily TDD techniques.
 
 To DO:
 
-- add ability to select where to place ships
+- fix bug where starting a new random game after a manual placed game keeps the mouseover event listeners and
+  clears out the random placed ships on the ui
