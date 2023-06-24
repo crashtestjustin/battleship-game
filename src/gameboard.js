@@ -50,8 +50,17 @@ export const gameboardFactory = () => {
       const isVert = document.querySelector("#is-vert");
       const pGrid = document.querySelectorAll(".p-grid");
       const bodyTitle = document.querySelector(".body-title");
+      const startGame = document.querySelector(".start-game");
       let shipIndex = 0;
       let shipObjM;
+
+      startGame.addEventListener("click", (e) => {
+        pGrid.forEach((grid) => {
+          grid.removeEventListener("click", handleGridClick);
+          grid.removeEventListener("mouseover", handleGridMouseOver);
+          grid.removeEventListener("mouseout", handleGridMouseOut);
+        });
+      });
 
       const handleGridClick = (e) => {
         const grid = e.target;
@@ -81,6 +90,7 @@ export const gameboardFactory = () => {
             console.log(shipCoordinatesM);
             // Valid placement, update gameboard
             shipObjM.location = shipCoordinatesM;
+
             this.shipObjects.push(shipObjM);
             this.boardArray.push(shipCoordinatesM);
             shipIndex++;
@@ -114,7 +124,7 @@ export const gameboardFactory = () => {
           if (shipObj.location && shipObj.location.length > 0) {
             shipObj.location.forEach((coord) => {
               const cell = document.getElementById(JSON.stringify(coord));
-              cell.style.backgroundColor = "orange";
+              cell.style.backgroundColor = "var(--placing-ship-color)";
             });
           } else {
             shipObj.location = this.checkValidManualPlacement(
@@ -127,18 +137,18 @@ export const gameboardFactory = () => {
               if (isOverlap) {
                 shipObj.location.forEach((coord) => {
                   const cell = document.getElementById(JSON.stringify(coord));
-                  cell.style.backgroundColor = "red";
+                  cell.style.backgroundColor = "var(--invalid-ship-placement)";
                 });
               } else {
                 shipObj.location.forEach((coord) => {
                   const cell = document.getElementById(JSON.stringify(coord));
-                  cell.style.backgroundColor = "orange";
+                  cell.style.backgroundColor = "var(--placing-ship-color)";
                 });
               }
             } else {
               shipObj.location.forEach((coord) => {
                 const cell = document.getElementById(JSON.stringify(coord));
-                cell.style.backgroundColor = "red";
+                cell.style.backgroundColor = "var(--invalid-ship-placement)";
               });
             }
           }
@@ -146,7 +156,7 @@ export const gameboardFactory = () => {
           if (shipObj.location && shipObj.location.length > 0) {
             shipObj.location.forEach((coord) => {
               const cell = document.getElementById(JSON.stringify(coord));
-              cell.style.backgroundColor = "orange";
+              cell.style.backgroundColor = "var(--placing-ship-color)";
             });
           } else {
             shipObj.location = this.checkValidManualPlacement(
@@ -159,18 +169,18 @@ export const gameboardFactory = () => {
               if (isOverlap) {
                 shipObj.location.forEach((coord) => {
                   const cell = document.getElementById(JSON.stringify(coord));
-                  cell.style.backgroundColor = "red";
+                  cell.style.backgroundColor = "var(--invalid-ship-placement)";
                 });
               } else {
                 shipObj.location.forEach((coord) => {
                   const cell = document.getElementById(JSON.stringify(coord));
-                  cell.style.backgroundColor = "orange";
+                  cell.style.backgroundColor = "var(--placing-ship-color)";
                 });
               }
             } else {
               shipObj.location.forEach((coord) => {
                 const cell = document.getElementById(JSON.stringify(coord));
-                cell.style.backgroundColor = "red";
+                cell.style.backgroundColor = "var(--invalid-ship-placement)";
               });
             }
           }
@@ -201,7 +211,7 @@ export const gameboardFactory = () => {
           this.boardArray.forEach((ship) => {
             ship.forEach((loc) => {
               const shipCell = document.getElementById(JSON.stringify(loc));
-              shipCell.style.backgroundColor = "orange";
+              shipCell.style.backgroundColor = "var(--placing-ship-color)";
             });
           });
         }
@@ -213,7 +223,7 @@ export const gameboardFactory = () => {
         this.shipObjects.forEach((ship) => {
           ship.location.forEach((coord) => {
             const gridCell = document.getElementById(JSON.stringify(coord));
-            gridCell.style.backgroundColor = "orange";
+            gridCell.style.backgroundColor = "var(--placing-ship-color)";
           });
         });
       };
