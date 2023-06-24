@@ -7,6 +7,8 @@
   --hit-attack: rgba(255, 88, 88, 0.734);
   --sunk-attack: rgba(250, 46, 46, 0.734);
   --ship-color: #599fc8ae;
+  --placing-ship-color: #70a6c678;
+  --invalid-ship-placement: rgba(255, 88, 88, 0.529);
 }
 
 body {
