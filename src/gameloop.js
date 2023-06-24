@@ -24,17 +24,14 @@ export function newGameLoop() {
     }
     if (activePlayerAttack === 5) {
       e.target.style.backgroundColor = "var(--hit-attack)";
-      console.log("Game Over");
       gameInProgress = false;
     }
     if (Array.isArray(activePlayerAttack)) {
       e.target.style.backgroundColor = "var(--missed-attack)";
       cMoveResult.textContent = "You Missed! ❌";
-      console.log("MISS");
     }
     if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
       e.target.style.backgroundColor = "var(--hit-attack)";
-      console.log(activePlayerAttack);
       if (activePlayerAttack.sunk) {
         cMoveResult.textContent = `You sunk their ${activePlayerAttack.name}!`;
         populateLists(activePlayerAttack, "user");
@@ -78,7 +75,6 @@ export function newGameLoop() {
             loc.style.backgroundColor = "var(--hit-attack)";
           }
         });
-        console.log("Game Over");
         bodyTitle.textContent = cpuPlayer.announceAsWinner();
         populateLists("final", "CPU");
         ShipSunkFormat(
@@ -105,7 +101,6 @@ export function newGameLoop() {
           }
         });
         pMoveResult.textContent = "CPU Missed! ❌";
-        console.log("MISS");
       }
       if (!Array.isArray(activePlayerAttack) && activePlayerAttack !== 5) {
         let attackCoor = cpuPlayer.attackHistory.slice(-1);
@@ -120,7 +115,6 @@ export function newGameLoop() {
           }
         });
 
-        console.log(activePlayerAttack);
         if (activePlayerAttack.sunk) {
           pMoveResult.textContent = `CPU has sunk your ${activePlayerAttack.name}! 🥲🪦`;
           populateLists(activePlayerAttack, "CPU");
@@ -130,7 +124,7 @@ export function newGameLoop() {
         }
       }
       bodyTitle.textContent = `Awaiting ${userPlayer.name}'s attack.`;
-    }, 500);
+    }, 1000);
   }
 
   //Game Initiation (with random ship placement)

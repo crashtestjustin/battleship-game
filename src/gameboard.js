@@ -87,7 +87,6 @@ export const gameboardFactory = () => {
           if (this.checkForShipOverlap(shipCoordinatesM)) {
             return;
           } else {
-            console.log(shipCoordinatesM);
             // Valid placement, update gameboard
             shipObjM.location = shipCoordinatesM;
 
@@ -215,7 +214,6 @@ export const gameboardFactory = () => {
             });
           });
         }
-        console.log(shipObj.location);
         shipObj.location.forEach((coord) => {
           const cell = document.getElementById(JSON.stringify(coord));
           cell.style.backgroundColor = "transparent";
@@ -253,18 +251,6 @@ export const gameboardFactory = () => {
           spotLocation = [startingCoordinates[0], startingCoordinates[1] + i];
         }
         coorindates.push(spotLocation);
-        // if (isVertical && this.searchValuesAbove9(coorindates)) {
-        //   console.log("falsy");
-        //   return false;
-        // }
-        // if (!isVertical && this.searchValuesAbove9(coorindates)) {
-        //   console.log("falsy");
-        //   return false;
-        // }
-        // if (this.compareArrays(spotLocation)) {
-        //   console.log("falsy");
-        //   return false;
-        // }
       }
       return coorindates;
     },
@@ -323,14 +309,6 @@ export const gameboardFactory = () => {
               break;
             }
           }
-          // if (
-          //   this.boardArray[i].some(
-          //     (coord) => coord[0] === a[0] && coord[1] === a[1]
-          //   )
-          // ) {
-          //   overlap = true;
-          //   break;
-          // }
           if (overlap) {
             break;
           }
