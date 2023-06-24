@@ -83,7 +83,7 @@ export const gameboardFactory = () => {
           );
         }
 
-        if (shipCoordinatesM) {
+        if (!this.searchValuesAbove9(shipCoordinatesM)) {
           if (this.checkForShipOverlap(shipCoordinatesM)) {
             return;
           } else {
@@ -110,6 +110,8 @@ export const gameboardFactory = () => {
             // Update the text content for the next ship
             bodyTitle.textContent = `Place your ${this.shipsLeft[shipIndex]}.`;
           }
+        } else {
+          return;
         }
       };
 
